@@ -4,7 +4,8 @@ const initialState = {
   loading: false,
   weatherId: null,
   name: '',
-  temperature: '',
+  temperatureinCelsius: '',
+  temperatureinFahrenheit: '',
   weather_state_name: '',
   latitude: null,
   longitude: null,
@@ -31,14 +32,14 @@ const weatherDataRecevied = (state, action) => {
 
   return {
     ...state,
-    loading: false,
     latitude,
     longitude,
-    temperatureinCelsius: the_temp,
-    temperatureinFahrenheit: toF(the_temp),
     weather_state_name,
     name,
-    data: action.data,
+    data,
+    loading: false,
+    temperatureinCelsius: the_temp,
+    temperatureinFahrenheit: toF(the_temp),
   };
 };
 

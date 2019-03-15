@@ -35,13 +35,9 @@ class Weather extends Component {
   }
 }
 
-const mapState = (state, ownProps) => {
-  const {
-    loading,
-    name,
-    weather_state_name,
-    temperatureinFahrenheit,
-  } = state.weather;
+const mapState = ({
+  weather: { loading, name, weather_state_name, temperatureinFahrenheit },
+}) => {
   return {
     loading,
     name,

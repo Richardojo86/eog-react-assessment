@@ -2,6 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import getDroneData from './store/api/getDroneData';
+
+(async () => {
+  const res = await getDroneData();
+  console.log(res);
+})();
 
 ReactDOM.render(React.createElement(App, {}), document.getElementById('root'));
 
