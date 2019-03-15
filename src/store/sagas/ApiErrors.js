@@ -10,4 +10,4 @@ function* watchApiError() {
   yield takeEvery(actions.API_ERROR, apiErrorReceived);
 }
 
-export default [watchApiError, apiErrorReceived];
+export default [watchApiError];

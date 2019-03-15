@@ -1,14 +1,11 @@
 import React from 'react';
-// import Card from '@material-ui/core/Card';
-// import CardHeaderRaw from '@material-ui/core/CardHeader';
-// import CardContent from '@material-ui/core/CardContent';
-import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {
   Card,
   CardHeader as CardHeaderRaw,
   CardContent,
   LinearProgress,
+  withStyles,
 } from '@material-ui/core';
 
 const cardStyles = theme => ({
@@ -32,11 +29,11 @@ const Dashboard = ({
   classes,
   latitude,
   longitude,
-  tempF,
-  tempC,
-  lastRecieved,
+  temperatureinFahrenheit,
+  temperatureinCelsius,
+  lastReceived,
 }) => {
-  const temperature = `${tempF}°F ${tempC}°C`;
+  const temperature = `${temperatureinFahrenheit}°F ${temperatureinCelsius}°C`;
 
   return loading ? (
     <LinearProgress />
@@ -47,17 +44,28 @@ const Dashboard = ({
         <p>Temperature: {temperature}</p>
         <p>Latitude: {latitude}</p>
         <p>Longitude: {longitude}</p>
-        <p>Last Recieved: {lastRecieved}</p>
+        <p>Last Received: {lastReceived}</p>
       </CardContent>
     </Card>
   );
 };
 
-export default connect(({ weather }) => ({
-  loading: weather.loading,
-  latitude: weather.latitude,
-  longitude: weather.longitude,
-  tempF: weather.temperatureinFahrenheit,
-  tempC: weather.temperatureinCelsius,
-  lastRecieved: null,
-}))(withStyles(styles)(Dashboard));
+export default connect(
+  ({
+    weather: {
+      loading,
+      latitude,
+      longitude,
+      temperatureinFahrenheit,
+      temperatureinCelsius,
+    },
+    drone: { lastReceived },
+  }) => ({
+    loading,
+    latitude,
+    longitude,
+    temperatureinFahrenheit,
+    temperatureinCelsius,
+    lastReceived,
+  })
+)(withStyles(styles)(Dashboard));
