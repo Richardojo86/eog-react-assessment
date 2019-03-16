@@ -8,12 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Wrapper from './components/Wrapper';
 import createStore from './store';
+import * as actions from './store/actions';
 import Dashboard from './components/Dashboard';
 import MapVisualization from './components/MapVisualization';
 import GraphVisualization from './components/GraphVisualization';
 import { Grid } from '@material-ui/core';
 
 const store = createStore();
+store.dispatch({ type: actions.INITIALIZE_LONG_POLLING });
+
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
@@ -31,17 +34,17 @@ const theme = createMuiTheme({
   },
 });
 
-const App = props => (
+const App = () => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
     <Provider store={store}>
       <Wrapper>
         <Header />
         <Grid container spacing={24}>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <Dashboard />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <GraphVisualization />
           </Grid>
           <Grid item xs={12}>

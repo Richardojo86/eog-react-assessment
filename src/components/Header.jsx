@@ -1,7 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import { connect } from 'react-redux';
+import { Typography, AppBar, Toolbar, LinearProgress } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import Weather from './Weather';
@@ -12,20 +11,23 @@ const styles = {
   },
 };
 
-const Header = props => {
-  const { classes } = props;
-
+const Header = ({ classes, loading }) => {
   const name = "Kelvin Mai's";
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" color="inherit" className={classes.grow}>
-          {name} EOG React Visualization Assessment
-        </Typography>
-        <Weather />
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            {name} EOG React Visualization Assessment
+          </Typography>
+          <Weather />
+        </Toolbar>
+      </AppBar>
+      {loading && <LinearProgress />}
+    </>
   );
 };
 
-export default withStyles(styles)(Header);
+export default connect(({ drone: { loading } }) => ({ loading }))(
+  withStyles(styles)(Header)
+);

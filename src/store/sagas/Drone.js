@@ -31,8 +31,7 @@ function* watchFetchDrone(action) {
     return;
   }
 
-  const accuracyMax = Math.max(...data.map(d => d.accuracy));
-  const { latitude, longitude } = data.find(i => i.accuracy === accuracyMax);
+  const [{ latitude, longitude }] = data;
 
   yield put({ type: actions.FETCH_WEATHER, latitude, longitude });
   yield put({ type: actions.DRONE_DATA_RECEIVED, data });

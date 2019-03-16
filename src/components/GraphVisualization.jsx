@@ -6,6 +6,7 @@ import {
   CardContent,
   withStyles,
 } from '@material-ui/core';
+import { Line } from 'react-chartjs-2';
 
 const cardStyles = theme => ({
   root: {
@@ -20,50 +21,35 @@ const CardHeader = withStyles(cardStyles)(CardHeaderRaw);
 const styles = {
   card: {
     flexGrow: 1,
-    margin: '5% 10%',
-    marginLeft: '5%',
+    margin: '2em 5em',
+    marginLeft: '1em',
   },
 };
 
-const GraphVisualization = ({
-  classes,
-  latitude,
-  longitude,
-  temperatureinFahrenheit,
-  temperatureinCelsius,
-  lastReceived,
-}) => {
-  const temperature = `${temperatureinFahrenheit}°F ${temperatureinCelsius}°C`;
+const GraphVisualization = ({ classes, dataset }) => {
+  const data = {
+    labels: dataset.map(d => new Date(d.timestamp).toLocaleTimeString()),
+    datasets: [
+      {
+        label: 'Drone Temperature',
+        fill: false,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        data: dataset.map(d => d.metric),
+      },
+    ],
+  };
 
   return (
     <Card className={classes.card}>
       <CardHeader title="Graph Visualization" />
       <CardContent>
-        <p>Temperature: {temperature}</p>
-        <p>Latitude: {latitude}</p>
-        <p>Longitude: {longitude}</p>
-        <p>Last Received: {lastReceived}</p>
+        <Line data={data} />
       </CardContent>
     </Card>
   );
 };
 
-export default connect(
-  ({
-    weather: {
-      loading,
-      latitude,
-      longitude,
-      temperatureinFahrenheit,
-      temperatureinCelsius,
-    },
-    drone: { lastReceived },
-  }) => ({
-    loading,
-    latitude,
-    longitude,
-    temperatureinFahrenheit,
-    temperatureinCelsius,
-    lastReceived,
-  })
-)(withStyles(styles)(GraphVisualization));
+export default connect(({ drone: { data } }) => ({
+  dataset: data,
+}))(withStyles(styles)(GraphVisualization));

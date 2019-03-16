@@ -20,8 +20,8 @@ const CardHeader = withStyles(cardStyles)(CardHeaderRaw);
 const styles = {
   card: {
     flexGrow: 1,
-    margin: '5% 10%',
-    marginRight: '5%',
+    margin: '2em 5em',
+    marginRight: '1em',
   },
 };
 
