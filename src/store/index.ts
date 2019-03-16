@@ -1,13 +1,23 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers,
+  ReducersMapObject,
+} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
 import sagas from './sagas';
-import weatherReducer from './reducers/Weather';
-import droneReducer from './reducers/Drone';
+import { weatherReducer, WeatherState } from './reducers/Weather';
+import { droneReducer, DroneState } from './reducers/Drone';
+
+export type Store = {
+  weather: WeatherState;
+  drone: DroneState;
+};
 
 export default () => {
-  const rootReducer = combineReducers({
+  const rootReducer = combineReducers(<ReducersMapObject<Store>>{
     weather: weatherReducer,
     drone: droneReducer,
   });

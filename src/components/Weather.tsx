@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import ChipRaw from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
 
-import * as actions from '../store/actions';
+import { Store } from '../store';
 
-const cardStyles = theme => ({
+const cardStyles = (theme: any) => ({
   root: {
     background: theme.palette.secondary.main,
   },
@@ -16,7 +15,17 @@ const cardStyles = theme => ({
 });
 const Chip = withStyles(cardStyles)(ChipRaw);
 
-const Weather = ({ name, weather_state_name, temperatureinFahrenheit }) => {
+interface Props {
+  name: string;
+  weather_state_name: string;
+  temperatureinFahrenheit: number;
+}
+
+const Weather: React.SFC<Props> = ({
+  name,
+  weather_state_name,
+  temperatureinFahrenheit,
+}) => {
   return (
     <Chip
       label={`Weather in ${name}: ${weather_state_name} and ${temperatureinFahrenheit}°`}
@@ -25,7 +34,9 @@ const Weather = ({ name, weather_state_name, temperatureinFahrenheit }) => {
 };
 
 export default connect(
-  ({ weather: { name, weather_state_name, temperatureinFahrenheit } }) => ({
+  ({
+    weather: { name, weather_state_name, temperatureinFahrenheit },
+  }: Store) => ({
     name,
     weather_state_name,
     temperatureinFahrenheit,

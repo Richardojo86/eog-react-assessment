@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-const findWeatherbyId = async id => {
+const findWeatherbyId = async (id: string) => {
   // Using the create-react-app's proxy for CORS issues
   const response = await fetch(
     `https://react-assessment-api.herokuapp.com/api/weather/location/${id}/`

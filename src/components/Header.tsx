@@ -4,6 +4,7 @@ import { Typography, AppBar, Toolbar, LinearProgress } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import Weather from './Weather';
+import { Store } from '../store';
 
 const styles = {
   grow: {
@@ -11,7 +12,12 @@ const styles = {
   },
 };
 
-const Header = ({ classes, loading }) => {
+interface Props {
+  classes: any;
+  loading: boolean;
+}
+
+const Header: React.SFC<Props> = ({ classes, loading }) => {
   const name = "Kelvin Mai's";
   return (
     <>
@@ -28,6 +34,6 @@ const Header = ({ classes, loading }) => {
   );
 };
 
-export default connect(({ drone: { loading } }) => ({ loading }))(
+export default connect(({ drone: { loading } }: Store) => ({ loading }))(
   withStyles(styles)(Header)
 );

@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-const findLocationByLatLong = async (latitude, longitude) => {
+const findLocationByLatLong = async (latitude: number, longitude: number) => {
   const latlon = [latitude, longitude].join(',');
   // Using the create-react-app's proxy for CORS issues
   const response = await fetch(

@@ -8,7 +8,9 @@ import {
 } from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
 
-const cardStyles = theme => ({
+import { Store } from '../store';
+
+const cardStyles = (theme: any) => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -26,7 +28,12 @@ const styles = {
   },
 };
 
-const GraphVisualization = ({ classes, dataset }) => {
+interface Props {
+  classes: any;
+  dataset: any[];
+}
+
+const GraphVisualization: React.SFC<Props> = ({ classes, dataset }) => {
   const data = {
     labels: dataset.map(d => new Date(d.timestamp).toLocaleTimeString()),
     datasets: [
@@ -50,6 +57,6 @@ const GraphVisualization = ({ classes, dataset }) => {
   );
 };
 
-export default connect(({ drone: { data } }) => ({
+export default connect(({ drone: { data } }: Store) => ({
   dataset: data,
 }))(withStyles(styles)(GraphVisualization));

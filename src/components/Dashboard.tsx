@@ -7,9 +7,10 @@ import {
   withStyles,
 } from '@material-ui/core';
 
-const toF = c => (c * 9) / 5 + 32;
+import { toF } from '../utilities';
+import { Store } from '../store';
 
-const cardStyles = theme => ({
+const cardStyles = (theme: any) => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -27,7 +28,16 @@ const styles = {
   },
 };
 
-const Dashboard = ({
+interface Props {
+  classes: any;
+  latitude: number;
+  longitude: number;
+  temperatureinFahrenheit: number;
+  temperatureinCelsius: number;
+  lastReceived: string;
+}
+
+const Dashboard: React.SFC<Props> = ({
   classes,
   latitude,
   longitude,
@@ -56,11 +66,11 @@ export default connect(
       data: [{ latitude, longitude, metric }],
       lastReceived,
     },
-  }) => ({
+  }: Store) => ({
     latitude,
     longitude,
     temperatureinFahrenheit: toF(metric),
     temperatureinCelsius: metric,
     lastReceived,
   })
-)(withStyles(styles)(Dashboard));
+)(withStyles(styles)(Dashboard) as any);

@@ -1,9 +1,8 @@
 import { takeEvery, call, put, cancel, all } from 'redux-saga/effects';
 
 import API from '../api';
-import * as actions from '../actions';
-
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+import { actions } from '../actions';
+import { delay } from '../../utilities';
 
 function* incrementLastReceived() {
   yield delay(1000);
@@ -22,7 +21,7 @@ function* continueLongPolling() {
   yield put({ type: actions.CONTINUE_LONG_POLLING });
 }
 
-function* watchFetchDrone(action) {
+function* watchFetchDrone(action: any) {
   const { error, data } = yield call(API.getDroneData);
   if (error) {
     console.log({ error });

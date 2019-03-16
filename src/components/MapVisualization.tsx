@@ -6,10 +6,12 @@ import {
   CardContent,
   withStyles,
 } from '@material-ui/core';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import * as secrets from '../secrets';
+import { Map, GoogleApiWrapper, Marker, GoogleAPI } from 'google-maps-react';
 
-const cardStyles = theme => ({
+import * as secrets from '../secrets';
+import { Store } from '../store';
+
+const cardStyles = (theme: any) => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -29,17 +31,21 @@ const styles = {
   },
 };
 
+interface MapContainerProps {
+  google: GoogleAPI;
+  dronePosition: google.maps.LatLngLiteral;
+}
+
 const MapContainer = GoogleApiWrapper({
   apiKey: secrets.googleMapKey,
-})(({ google, dronePosition }) => {
-  console.log('drone position', dronePosition);
+})(({ google, dronePosition }: MapContainerProps) => {
   return (
     <Map
       google={google}
       zoom={6}
       centerAroundCurrentLocation
       center={dronePosition}
-      style={{ width: '85%', height: '100%', position: 'relative' }}
+      // style={{ width: '85%', height: '100%', position: 'relative' }}
     >
       <Marker
         title={`Drone Position ${JSON.stringify(dronePosition)}`}
@@ -49,7 +55,19 @@ const MapContainer = GoogleApiWrapper({
   );
 });
 
-const MapVisualization = ({ classes, lastReceived, latitude, longitude }) => {
+interface MapVisualizationProps {
+  classes: any;
+  lastReceived: number;
+  latitude: number;
+  longitude: number;
+}
+
+const MapVisualization: React.SFC<MapVisualizationProps> = ({
+  classes,
+  lastReceived,
+  latitude,
+  longitude,
+}) => {
   return (
     <Card className={classes.card}>
       <CardHeader title="Map Visualization" />
@@ -67,7 +85,7 @@ export default connect(
       lastReceived,
       data: [{ latitude, longitude }],
     },
-  }) => ({
+  }: Store) => ({
     latitude,
     longitude,
     lastReceived,

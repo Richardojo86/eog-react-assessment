@@ -1,18 +1,21 @@
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  CssBaseline,
+  Grid,
+} from '@material-ui/core';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Header from './components/Header';
 import Wrapper from './components/Wrapper';
 import createStore from './store';
-import * as actions from './store/actions';
+import { actions } from './store/actions';
 import Dashboard from './components/Dashboard';
 import MapVisualization from './components/MapVisualization';
 import GraphVisualization from './components/GraphVisualization';
-import { Grid } from '@material-ui/core';
 
 const store = createStore();
 store.dispatch({ type: actions.INITIALIZE_LONG_POLLING });
@@ -32,7 +35,7 @@ const theme = createMuiTheme({
       main: 'rgb(226,231,238)',
     },
   },
-});
+} as any);
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
