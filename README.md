@@ -1,3 +1,3 @@
 ## Create React App Visualization
 
-Read more about this assessment here
+For complete README, please switch back to branch `master`

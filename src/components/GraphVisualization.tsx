@@ -5,12 +5,14 @@ import {
   CardHeader as CardHeaderRaw,
   CardContent,
   withStyles,
+  Theme,
 } from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
 
 import { Store } from '../store';
+import { DroneData } from '../store/reducers/Drone';
 
-const cardStyles = (theme: any) => ({
+const cardStyles = (theme: Theme) => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -30,7 +32,7 @@ const styles = {
 
 interface Props {
   classes: any;
-  dataset: any[];
+  dataset: DroneData[];
 }
 
 const GraphVisualization: React.SFC<Props> = ({ classes, dataset }) => {

@@ -12,3 +12,8 @@ export enum actions {
   DRONE_DATA_RECEIVED = 'EVENT/DRONE_DATA_RECEIVED',
   DRONE_INCREMENT_LAST_RECEIVED = 'EVENT/DRONE_INCREMENT_LAST_RECEIVED',
 }
+
+export interface Action {
+  type: actions;
+  [index: string]: any;
+}

@@ -5,13 +5,14 @@ import {
   CardHeader as CardHeaderRaw,
   CardContent,
   withStyles,
+  Theme,
 } from '@material-ui/core';
 import { Map, GoogleApiWrapper, Marker, GoogleAPI } from 'google-maps-react';
 
 import * as secrets from '../secrets';
 import { Store } from '../store';
 
-const cardStyles = (theme: any) => ({
+const cardStyles = (theme: Theme) => ({
   root: {
     background: theme.palette.primary.main,
   },

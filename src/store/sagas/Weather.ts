@@ -1,9 +1,9 @@
 import { takeEvery, call, put, cancel, all } from 'redux-saga/effects';
 
 import API from '../api';
-import { actions } from '../actions';
+import { actions, Action } from '../actions';
 
-function* watchWeatherIdReceived(action: any) {
+function* watchWeatherIdReceived(action: Action) {
   const { id } = action;
   const { error, data } = yield call(API.findWeatherbyId, id);
   if (error) {
@@ -14,7 +14,7 @@ function* watchWeatherIdReceived(action: any) {
   yield put({ type: actions.WEATHER_DATA_RECEIVED, data });
 }
 
-function* watchFetchWeather(action: any) {
+function* watchFetchWeather(action: Action) {
   const { latitude, longitude } = action;
   const { error, data } = yield call(
     API.findLocationByLatLng,

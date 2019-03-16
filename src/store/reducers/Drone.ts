@@ -1,19 +1,31 @@
-import { actions } from '../actions';
+import { actions, Action } from '../actions';
+
+export interface DroneData {
+  latitude: number;
+  longitude: number;
+  uom: string;
+  accuracy: number;
+  metric: number;
+  timestamp: Date;
+}
 
 export interface DroneState {
-  data: any[];
+  data: DroneData[];
   loading: boolean;
   lastReceived: number;
 }
 
-export type DroneReducer = (state: DroneState, action: any) => DroneState;
+export type DroneReducer = (state: DroneState, action: Action) => DroneState;
 
 const initialState: DroneState = {
   data: [
     {
-      latitude: '',
-      longitude: '',
+      latitude: 0,
+      longitude: 0,
       metric: 0,
+      uom: '',
+      accuracy: 0,
+      timestamp: new Date(),
     },
   ],
   loading: false,

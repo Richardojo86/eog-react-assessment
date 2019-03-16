@@ -1,4 +1,4 @@
-import { actions } from '../actions';
+import { actions, Action } from '../actions';
 import { toF } from '../../utilities';
 
 export interface WeatherState {
@@ -13,7 +13,10 @@ export interface WeatherState {
   data: any;
 }
 
-export type WeatherReducer = (state: WeatherState, action: any) => WeatherState;
+export type WeatherReducer = (
+  state: WeatherState,
+  action: Action
+) => WeatherState;
 
 const initialState: WeatherState = {
   loading: false,
@@ -27,7 +30,7 @@ const initialState: WeatherState = {
   data: {},
 };
 
-const startLoading: WeatherReducer = (state, action) => {
+const startLoading: WeatherReducer = state => {
   return { ...state, loading: true };
 };
 

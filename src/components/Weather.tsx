@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ChipRaw from '@material-ui/core/Chip';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Theme } from '@material-ui/core/styles';
 
 import { Store } from '../store';
 
-const cardStyles = (theme: any) => ({
+const cardStyles = (theme: Theme) => ({
   root: {
     background: theme.palette.secondary.main,
   },

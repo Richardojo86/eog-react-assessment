@@ -5,12 +5,13 @@ import {
   CardHeader as CardHeaderRaw,
   CardContent,
   withStyles,
+  Theme,
 } from '@material-ui/core';
 
 import { toF } from '../utilities';
 import { Store } from '../store';
 
-const cardStyles = (theme: any) => ({
+const cardStyles = (theme: Theme) => ({
   root: {
     background: theme.palette.primary.main,
   },

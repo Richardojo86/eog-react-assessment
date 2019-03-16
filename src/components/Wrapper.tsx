@@ -1,9 +1,14 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Theme } from '@material-ui/core';
+import { TypeBackground } from '@material-ui/core/styles/createPalette';
 
-const styles = (theme: any) => ({
+interface BackgroundWithMain extends TypeBackground {
+  main: string;
+}
+
+const styles = (theme: Theme) => ({
   wrapper: {
-    background: theme.palette.background.main,
+    background: (theme.palette.background as BackgroundWithMain).main,
     height: '90vh',
   },
 });

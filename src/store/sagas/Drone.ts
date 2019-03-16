@@ -21,7 +21,7 @@ function* continueLongPolling() {
   yield put({ type: actions.CONTINUE_LONG_POLLING });
 }
 
-function* watchFetchDrone(action: any) {
+function* watchFetchDrone() {
   const { error, data } = yield call(API.getDroneData);
   if (error) {
     console.log({ error });

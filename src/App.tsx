@@ -16,6 +16,7 @@ import { actions } from './store/actions';
 import Dashboard from './components/Dashboard';
 import MapVisualization from './components/MapVisualization';
 import GraphVisualization from './components/GraphVisualization';
+import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
 const store = createStore();
 store.dispatch({ type: actions.INITIALIZE_LONG_POLLING });
@@ -35,7 +36,7 @@ const theme = createMuiTheme({
       main: 'rgb(226,231,238)',
     },
   },
-} as any);
+} as ThemeOptions);
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
