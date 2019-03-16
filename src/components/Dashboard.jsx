@@ -7,6 +7,8 @@ import {
   withStyles,
 } from '@material-ui/core';
 
+const toF = c => (c * 9) / 5 + 32;
+
 const cardStyles = theme => ({
   root: {
     background: theme.palette.primary.main,
@@ -50,20 +52,15 @@ const Dashboard = ({
 
 export default connect(
   ({
-    weather: {
-      loading,
-      latitude,
-      longitude,
-      temperatureinFahrenheit,
-      temperatureinCelsius,
+    drone: {
+      data: [{ latitude, longitude, metric }],
+      lastReceived,
     },
-    drone: { lastReceived },
   }) => ({
-    loading,
     latitude,
     longitude,
-    temperatureinFahrenheit,
-    temperatureinCelsius,
+    temperatureinFahrenheit: toF(metric),
+    temperatureinCelsius: metric,
     lastReceived,
   })
 )(withStyles(styles)(Dashboard));

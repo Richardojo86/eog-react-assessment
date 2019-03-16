@@ -1,7 +1,13 @@
 import * as actions from '../actions';
 
 const initialState = {
-  data: [],
+  data: [
+    {
+      latitude: '',
+      longitude: '',
+      metric: 0,
+    },
+  ],
   loading: false,
   lastReceived: 0,
 };
