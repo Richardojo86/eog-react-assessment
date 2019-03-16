@@ -6,6 +6,8 @@ import {
   CardContent,
   withStyles,
 } from '@material-ui/core';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import * as secrets from '../secrets';
 
 const cardStyles = theme => ({
   root: {
@@ -22,25 +24,37 @@ const styles = {
     flexGrow: 1,
     margin: '0 5em',
   },
+  content: {
+    height: '110vh',
+  },
 };
 
-const MapVisualization = ({
-  classes,
-  latitude,
-  longitude,
-  temperatureinFahrenheit,
-  temperatureinCelsius,
-  lastReceived,
-}) => {
-  const temperature = `${temperatureinFahrenheit}°F ${temperatureinCelsius}°C`;
+const MapContainer = GoogleApiWrapper({
+  apiKey: secrets.googleMapKey,
+})(({ google, dronePosition }) => {
+  console.log('drone position', dronePosition);
+  return (
+    <Map
+      google={google}
+      zoom={6}
+      centerAroundCurrentLocation
+      center={dronePosition}
+      style={{ width: '85%', height: '100%', position: 'relative' }}
+    >
+      <Marker
+        title={`Drone Position ${JSON.stringify(dronePosition)}`}
+        position={dronePosition}
+      />
+    </Map>
+  );
+});
 
+const MapVisualization = ({ classes, lastReceived, latitude, longitude }) => {
   return (
     <Card className={classes.card}>
       <CardHeader title="Map Visualization" />
-      <CardContent>
-        <p>Temperature: {temperature}</p>
-        <p>Latitude: {latitude}</p>
-        <p>Longitude: {longitude}</p>
+      <CardContent className={classes.content}>
+        <MapContainer dronePosition={{ lat: latitude, lng: longitude }} />
         <p>Last Received: {lastReceived}</p>
       </CardContent>
     </Card>
@@ -49,20 +63,13 @@ const MapVisualization = ({
 
 export default connect(
   ({
-    weather: {
-      loading,
-      latitude,
-      longitude,
-      temperatureinFahrenheit,
-      temperatureinCelsius,
+    drone: {
+      lastReceived,
+      data: [{ latitude, longitude }],
     },
-    drone: { lastReceived },
   }) => ({
-    loading,
     latitude,
     longitude,
-    temperatureinFahrenheit,
-    temperatureinCelsius,
     lastReceived,
   })
 )(withStyles(styles)(MapVisualization));
