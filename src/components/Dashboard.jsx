@@ -4,7 +4,6 @@ import {
   Card,
   CardHeader as CardHeaderRaw,
   CardContent,
-  LinearProgress,
   withStyles,
 } from '@material-ui/core';
 
@@ -35,9 +34,7 @@ const Dashboard = ({
 }) => {
   const temperature = `${temperatureinFahrenheit}°F ${temperatureinCelsius}°C`;
 
-  return loading ? (
-    <LinearProgress />
-  ) : (
+  return (
     <Card className={classes.card}>
       <CardHeader title="Dashboard" />
       <CardContent>

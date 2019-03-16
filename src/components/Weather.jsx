@@ -4,6 +4,8 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import ChipRaw from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
 
+import * as actions from '../store/actions';
+
 const cardStyles = theme => ({
   root: {
     background: theme.palette.secondary.main,
@@ -42,5 +44,8 @@ export default connect(
     name,
     weather_state_name,
     temperatureinFahrenheit,
+  }),
+  dispatch => ({
+    onLoad: () => dispatch({ type: actions.INITIALIZE_LONG_POLLING }),
   })
 )(Weather);
