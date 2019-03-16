@@ -9,6 +9,9 @@ import Header from './components/Header';
 import Wrapper from './components/Wrapper';
 import createStore from './store';
 import Dashboard from './components/Dashboard';
+import MapVisualization from './components/MapVisualization';
+import GraphVisualization from './components/GraphVisualization';
+import { Grid } from '@material-ui/core';
 
 const store = createStore();
 const theme = createMuiTheme({
@@ -34,7 +37,17 @@ const App = props => (
     <Provider store={store}>
       <Wrapper>
         <Header />
-        <Dashboard />
+        <Grid container spacing={24}>
+          <Grid item xs={6}>
+            <Dashboard />
+          </Grid>
+          <Grid item xs={6}>
+            <GraphVisualization />
+          </Grid>
+          <Grid item xs={12}>
+            <MapVisualization />
+          </Grid>
+        </Grid>
         <ToastContainer />
       </Wrapper>
     </Provider>

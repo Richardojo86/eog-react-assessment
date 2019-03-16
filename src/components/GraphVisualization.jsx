@@ -21,11 +21,11 @@ const styles = {
   card: {
     flexGrow: 1,
     margin: '5% 10%',
-    marginRight: '5%',
+    marginLeft: '5%',
   },
 };
 
-const Dashboard = ({
+const GraphVisualization = ({
   classes,
   latitude,
   longitude,
@@ -37,7 +37,7 @@ const Dashboard = ({
 
   return (
     <Card className={classes.card}>
-      <CardHeader title="Dashboard" />
+      <CardHeader title="Graph Visualization" />
       <CardContent>
         <p>Temperature: {temperature}</p>
         <p>Latitude: {latitude}</p>
@@ -66,4 +66,4 @@ export default connect(
     temperatureinCelsius,
     lastReceived,
   })
-)(withStyles(styles)(Dashboard));
+)(withStyles(styles)(GraphVisualization));
