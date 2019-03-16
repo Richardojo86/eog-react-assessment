@@ -8,8 +8,8 @@ Your mission, dear developer, is to visualize the drones position and temperatur
 
 For mid to advanced devs, please create a visualization of either a map or a chart of the metric.
 
-![Screenshot 1](./screenshot1.png =500x)
-![Screenshot 2](./screenshot2.png =500px)
+<img src="screenshot1.png" alt="drawing" width="500"/>
+<img src="screenshot2.png" alt="drawing" width="500"/>
 
 ### Technologies Used
 
