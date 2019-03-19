@@ -1,4 +1,4 @@
-import { actions, Action } from '../actions';
+import { actions, DroneAction } from '../actions';
 
 export interface DroneData {
   latitude: number;
@@ -15,7 +15,10 @@ export interface DroneState {
   lastReceived: number;
 }
 
-export type DroneReducer = (state: DroneState, action: Action) => DroneState;
+export type DroneReducer = (
+  state: DroneState,
+  action: DroneAction
+) => DroneState;
 
 const initialState: DroneState = {
   data: [
@@ -32,15 +35,15 @@ const initialState: DroneState = {
   lastReceived: 0,
 };
 
-const fetchDrone: DroneReducer = (state: DroneState) => {
+const fetchDrone: DroneReducer = state => {
   return { ...state, loading: true, lastReceived: 0 };
 };
 
-const droneDataReceived: DroneReducer = (state: DroneState, { data }) => {
+const droneDataReceived: DroneReducer = (state, { payload: data }) => {
   return { ...state, data, loading: false };
 };
 
-const incrementLastReceived: DroneReducer = (state: DroneState) => {
+const incrementLastReceived: DroneReducer = state => {
   return { ...state, lastReceived: state.lastReceived + 1 };
 };
 

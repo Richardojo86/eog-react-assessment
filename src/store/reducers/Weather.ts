@@ -1,4 +1,4 @@
-import { actions, Action } from '../actions';
+import { actions, WeatherAction } from '../actions';
 import { toF } from '../../utilities';
 
 export interface WeatherState {
@@ -15,7 +15,7 @@ export interface WeatherState {
 
 export type WeatherReducer = (
   state: WeatherState,
-  action: Action
+  action: WeatherAction
 ) => WeatherState;
 
 const initialState: WeatherState = {
@@ -34,12 +34,11 @@ const startLoading: WeatherReducer = state => {
   return { ...state, loading: true };
 };
 
-const weatherIDReceived: WeatherReducer = (state, action) => {
-  return { ...state, weatherId: action.id };
+const weatherIDReceived: WeatherReducer = (state, { payload: { id } }) => {
+  return { ...state, weatherId: id };
 };
 
-const weatherDataRecevied: WeatherReducer = (state, action) => {
-  const { data } = action;
+const weatherDataRecevied: WeatherReducer = (state, { payload: { data } }) => {
   if (!data['consolidated_weather']) return state;
   const weather = data.consolidated_weather[0];
   const { weather_state_name, the_temp } = weather;

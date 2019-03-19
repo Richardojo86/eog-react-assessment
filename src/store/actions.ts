@@ -1,3 +1,5 @@
+import { DroneData } from './reducers/Drone';
+
 export enum actions {
   API_ERROR = 'EVENT/API_ERROR_RECEIVED',
 
@@ -13,7 +15,25 @@ export enum actions {
   DRONE_INCREMENT_LAST_RECEIVED = 'EVENT/DRONE_INCREMENT_LAST_RECEIVED',
 }
 
-export interface Action {
+interface Action {
   type: actions;
-  [index: string]: any;
+  payload: unknown;
+}
+
+export interface ApiAction {
+  type: actions;
+  code: string;
+}
+
+export interface DroneAction extends Action {
+  payload: DroneData[];
+}
+
+export interface WeatherAction extends Action {
+  payload: {
+    id: string;
+    latitude: number;
+    longitude: number;
+    data: any;
+  };
 }

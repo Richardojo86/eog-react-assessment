@@ -1,7 +1,7 @@
 import { takeEvery, call, put, cancel, all } from 'redux-saga/effects';
 
 import API from '../api';
-import { actions } from '../actions';
+import { actions, WeatherAction, DroneAction } from '../actions';
 import { delay } from '../../utilities';
 
 function* incrementLastReceived() {
@@ -32,8 +32,11 @@ function* watchFetchDrone() {
 
   const [{ latitude, longitude }] = data;
 
-  yield put({ type: actions.FETCH_WEATHER, latitude, longitude });
-  yield put({ type: actions.DRONE_DATA_RECEIVED, data });
+  yield put(<WeatherAction>{
+    type: actions.FETCH_WEATHER,
+    payload: { latitude, longitude },
+  });
+  yield put(<DroneAction>{ type: actions.DRONE_DATA_RECEIVED, payload: data });
 }
 
 function* watchAppLoad() {
